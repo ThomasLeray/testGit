@@ -6,7 +6,7 @@
 <html lang="fr">
 
 <head>
-    <title>Accueil provisoire</title>
+    <title>Ferme là Boulard</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/assets/css/accueil.css" type="text/css" />
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
