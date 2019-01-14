@@ -1,0 +1,343 @@
+@font-face {
+    font-family: "Effra Light";
+    src: url("../font/Effra_Lt.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Effra Medium";
+    src: url("../font/Effra_Md.ttf") format("truetype");
+}
+
+@orange: #E95039;
+@bleu: #283978;
+@gris: #AEACAD;
+
+body {
+    background: url(../images/fond.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Effra Light";
+}
+
+h3 {
+    font-family: "Effra Medium";
+    font-size: 2.22rem;
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    padding-bottom: 3vh;
+    color: @bleu;
+}
+
+main {
+    height: 100vh;
+    width: 100vw;
+    color: @gris;
+
+    section {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-flow: column nowrap;
+                flex-flow: column nowrap;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        height: 100%;
+        width: 100%;
+        
+        div,
+        form {
+            font-size: 0.9rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+    }
+}
+
+#orange {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top:0;
+    right:0;  
+}
+
+#formulaire {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    line-height: 6vh;
+    
+    a {
+        text-decoration: none;
+        color: @gris;
+        margin: 2vh 0;
+    }
+}
+
+#informations {
+    text-align: justify;
+}
+
+input {
+    border-radius: 10px;
+    font-size: 1.22rem;
+    outline: 0 none;
+}
+
+input[type="text"],
+input[type="password"] {
+    font-family: "Effra Light";
+    margin-bottom: 2vh;
+    border: 0.08rem solid @gris;
+    padding: 1.2vh 1vw 0.5vh 1vw;
+    color: @bleu;
+}
+
+input[type="submit"] {
+    background-color: @bleu;
+    color: white;
+    font-family: "Effra Medium";
+    padding: 1.5vh 0 1.2vh 0;
+    border: none;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+
+    input {
+        position: absolute;
+        display: none;
+        cursor: pointer;
+        
+        &:checked ~ .checkmark {
+            background-color: @gris;
+            
+            &::after {
+                display: block;
+            }
+        }
+    }
+    
+    .checkmark::after {
+        border: solid white;
+        -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+        left: 0.33rem;
+        top: 0.11rem;
+        width: 0.28rem;
+        height: 0.56rem;
+        border-width: 0 0.2rem 0.2rem 0;
+    }
+    
+    span{
+        top: 6px;
+    }
+}
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    background-color: white;
+    border: solid @gris;
+    border-radius: 5px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+}
+
+.checkmark {
+    height: 1.11rem;
+    width: 1.11rem;
+    border-width: 0.08rem;    
+}
+
+@media (max-width: 480px) {
+    header {
+        display: none;
+    }
+
+    main section {
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+
+        div,
+        form {
+            width: 80vw;
+        }
+    }
+
+    #formulaire {
+        padding: 5vh 6vw;
+    }
+
+    #informations {
+        padding: 6vw;
+    }
+
+    .container {
+        padding-left: 2.78rem;
+    }
+}
+
+@media (min-width: 480px) {
+    
+    header {
+        display: none;
+    }
+
+    main section {
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+        
+        div,
+        form {
+            width: 50vw;
+        }
+    }
+    
+    #formulaire {
+        padding: 4vh 3vw;
+    }
+
+    #informations {
+        padding: 3vw;
+    }
+    
+    .container {
+        padding-left: 2.22rem;
+    }
+}
+
+@media (min-width: 960px) {
+    body {
+        color: white;
+    }
+
+    header {
+        display: block;
+    }
+
+    #univ {
+        position: absolute;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: start;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
+        -webkit-box-align: start;
+            -ms-flex-align: start;
+                align-items: flex-start;
+        height: 14vh;
+        width: 15vw;
+        padding: 3vh 0 0 13vmin;
+        z-index: 1;
+
+        img {
+            position: absolute;
+            top: 3.8vh;
+            left: 1.5vw;
+            height: 13.5vh;
+        }
+
+        div {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                    justify-content: space-between;
+            height: 100%;
+        }
+    }
+
+    h1 {
+        font-family: "Effra Medium";
+        margin:0;
+        font-size: 6.1rem;
+        padding: 0.1vh 0 0 1vw;
+        margin-bottom: -4vh;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 1.39rem;
+        border-left: 0.2vw solid white;
+        padding-left: 0.3vw;
+        padding-top: 0.6vh;
+        margin-left: 1.3vw;
+    }
+
+    main {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+
+        section {
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
+
+            div,
+            form {
+                width: 40vw;
+            }
+        }
+    }
+
+    #orange {
+        background-color: rgba(233,80,57,0.43);
+        -webkit-clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 9.8vw, 9.8vw 0);
+                clip-path: polygon(100% 0%, 100% 100%, 0% 100%, 0% 9.8vw, 9.8vw 0);
+    }
+
+    #formulaire {
+        margin-bottom: 4vh;
+        padding: 3vh 1vw;
+    }
+
+    #informations {
+        padding: 1vw;
+    }
+
+    .container {
+        padding-left: 1.67rem;
+        
+        &:hover input ~ .checkmark {
+            background-color: rgba(174,172,173,0.5);
+        }
+    }
+}

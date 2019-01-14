@@ -1,0 +1,1134 @@
+@font-face {
+  font-family: "Effra Bold";
+  src: url("../font/Effra_Bd.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Effra Light";
+  src: url("../font/Effra_Lt.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Effra Medium";
+  src: url("../font/Effra_Md.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Effra Regular";
+  src: url("../font/Effra_Rg.ttf") format("truetype");
+}
+
+@fontFamily: "Effra Regular";
+@fontSize: 2.5vmin;
+@bleu: #283978;
+@orange: #E95039;
+
+body {
+    background: url(../images/fond.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: @fontFamily;
+    color: @bleu;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+}
+
+h1 {
+    text-align: right;
+    grid-area: pageName;
+    text-transform: uppercase;
+    font-family: "Effra Bold";
+    font-size: @fontSize + 3;
+    padding-top: 0.75vh;
+}
+
+h2 {
+    text-align: left;
+    grid-area: identite;
+    font-size: @fontSize + 0.5;
+    padding-top: 1.5vh;
+}
+
+h3 {
+    margin: 0 1vw 0 1vw;
+    padding: 2vh 0 1vh 0;
+    border-bottom: 1px solid #F39E92;
+    font-size: @fontSize;
+}
+
+h4 {
+    font-size: @fontSize - 0.5;
+    text-transform: uppercase;
+}
+
+h5 {
+    font-size: @fontSize - 1;
+}
+
+a {
+    color: @bleu;
+}
+
+header {
+    margin:0;
+    padding: 0 1vw 0 1vw;
+    height: 4vh;
+    background-color: white;
+    position: sticky;
+    display: grid;
+    grid-template-columns: 2fr 11fr 2fr 7fr 6fr;
+    grid-template-areas: "menu pageName logo identite nav";
+    align-items: center;
+    filter: drop-shadow(0.4rem 0.4rem 0.6rem rgba(0,0,0,0.4));
+    
+    label {
+        position: relative;
+        display: block;
+        grid-area: menu;
+        margin: 0 1vh;
+        height: 5vmin;
+        width: 5vmin;
+        z-index: 3;
+        transition: 0.5s ease-in-out;
+        cursor: pointer;
+        
+        div {
+            display: block;
+            position: absolute;
+            top: 1vh;
+            height: 0.6vmin;
+            width: 5vmin;
+            border-radius: 2px;
+            background-color: @orange;
+            transition: 0.5s ease-in-out;
+            
+            &::after,
+            &::before {
+                content: '';
+                height: 0.6vmin;
+                width: 5vmin;
+                background-color: #E95039;
+                position: absolute;
+                border-radius: 2px;
+                transition: 0.5s ease-in-out;
+            }
+            
+            &::after {
+                top: 0.7vh;
+            }
+            
+            &::before {
+                top: -0.7vh;
+            }
+        }
+    }
+    
+    input {
+        display: none;
+        
+        &:checked + div {
+            transform: rotate(90deg);
+            background-color: transparent;
+            
+            &::after,
+            &::before {
+                background-color: @bleu;
+                top: -8vh; //à revoir
+                left: 7vw; //à revoir
+            }
+            
+            &::after {
+                transform: rotate(-45deg);
+            }
+            
+            &::before {
+                transform: rotate(45deg);
+            }
+        }
+    }
+    
+    h2 {
+        display: none;
+    }
+}
+#burger_toggle {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: -25vw;
+    width: 25vw;
+    height: 100vh;
+    background-color: #EB634F;
+    transition: 0.5s ease-in-out;
+}
+
+#haut_menu {
+    height: 15vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: white;
+    margin: 0;
+    
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 1.5vw;
+    }
+        
+    a {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding-top: 1vh;
+
+        h5 {
+            padding-top: 0.6vh;
+        }
+
+        img {
+            padding: 0 1vw 0 0.3vw;
+            height: 2.7vmin;
+            max-width: 100%;
+        }
+    }
+}
+
+#bas_menu {
+    position: relative;
+    padding-top: 3vh;
+
+    ul {
+        margin: 0;
+        padding-left: 1.5vw;
+    }
+
+    li {
+        list-style: none;
+        padding-bottom: 2vh;
+        
+        a {
+            color: white;
+            text-decoration: none;
+            font-size: @fontSize;
+        }
+    }
+}
+
+#burger-overlay {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.33);
+    transition: 0.5s ease-in-out;
+    z-index: 1;
+}
+
+#logo {
+    position: relative;
+    min-width: 10.3vmin;
+    grid-area: logo;
+
+    img {
+        position: absolute;
+        width: auto;
+        height: 6vh;
+        top: -2.5vh;
+        left: calc(50% - 40vw);
+    }
+}
+
+#icones_nav {
+    display: none;
+}
+
+main {
+    overflow: scroll;
+    background-color: rgba(255, 255, 255, 0.6);
+    background-attachment: fixed;
+    height: 96vh;
+}
+
+section {
+    padding: 3vh 2vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.boite {
+    background-color: rgba(255, 255, 255, 0.88);
+    flex-basis: calc((100% - 40px) / 3);
+    width: calc((100% - 40px) / 3);
+    min-width: 275px;
+}
+
+.haut {
+    height: 43vh;    
+    margin-bottom: 2vh;
+    position: relative;
+}
+
+.bas {
+    height: 22vh;
+}
+
+.notif-mail {
+    position: absolute;
+    margin:0;
+    color: @orange;
+    font-family: "Effra Light";
+    font-size: @fontSize - 0.7;
+    font-weight: bold;
+    top: 2.2vh;
+    right: 1vw;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8%;
+    padding: 0.5vh 0.3vw 0 0.3vw;
+}
+
+#derniers-mails {
+    height: 34.8vh;
+    margin-top: 1.7vh;
+    display: grid;
+    grid-template-columns: 21fr 2fr;
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: space-between;
+    background-color: #3F5ABD;
+    border: 0.2vh solid rgba(40,57,120,0.2);
+}
+
+.fleche_mail {
+    height: 100%;
+    width: 100%;
+    background-color: @bleu;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &:not(:last-child) {
+        border-bottom: 0.2vh solid rgba(40,57,120,0.2);
+    }
+    
+    img {
+        height: 8vh;
+        object-fit: contain;
+        cursor: pointer;
+    }
+}
+
+.mail {
+    height: 11.4vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 2fr 1fr 3fr;
+    grid-template-areas: "auteur auteur date" "objet objet objet" "vide corps corps";
+    color: white;
+    padding: 0 1vmin;
+    cursor: pointer;
+    
+    &:not(:last-child) {
+        border-bottom: 0.2vh solid rgba(40,57,120,0.2);
+    }
+}
+
+.auteur-mail {
+    margin: 0;
+    font-family: "Effra Bold";
+    grid-area: auteur;
+    font-size: @fontSize - 0.3;
+    padding-top: 1.8vh;
+}
+
+.date-mail {
+    margin: 0;
+    font-family: "Effra Bold";
+    grid-area: date;
+    font-size: @fontSize;
+    padding-top: 1vh;
+    text-align: right;
+}
+
+.objet-mail {
+    margin: 0;
+    font-family: "Effra Light";
+    grid-area: objet;
+    font-size: @fontSize - 0.7;
+}
+
+.corps-mail {
+    margin: 0;
+    font-family: "Effra Light";
+    grid-area: corps;
+    font-size: @fontSize - 1.2;
+    padding-top: 0.7vh;
+}
+
+#modifier-note {
+    position: absolute;
+    top: 1.5vh;
+    right: 1vw;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    min-width: 8vmax;
+    height: 3vmin;
+    
+    img {
+        height: 100%;
+        margin-left: 0.5vmax;
+        cursor: pointer;
+        
+        &:hover {
+            transform: scale(1.5);
+        }
+    }
+}
+
+.date-note {
+    margin: 1.5vmin 1vw 1vmin 1vw;
+    font-size: @fontSize + 0.5;
+    color: #EB634F;
+}
+
+.note-perso {
+    font-family: "Effra Light";
+    font-size: @fontSize + 0.3;
+    margin: 0 1vw 0 1vw;
+    text-align: justify;
+}
+
+.date-courante{
+    position: absolute;
+    margin:0;
+    color: @orange;
+    font-family: "Effra Light";
+    font-size: 1.1vmax;
+    top: 2.2vh;
+    right: 1vw;
+}
+
+.cours {
+    margin: 2vh 0;
+    padding-top: 2vh 1vw;
+    background-color: white;
+    font-family: "Effra Light";
+    font-size: @fontSize + 1;
+    
+    div {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-end;
+        margin: 0;
+        padding: 1vh 1vw;
+
+        .salle {
+            margin: 0;
+            color: @orange;
+            padding-left: 1vh;
+        }
+    }
+}
+
+.horaire {
+    margin: 0;
+    color: @orange;
+    font-size: @fontSize + 0.5;
+    padding: 1vh 1vw 0 1vw;
+}
+
+#espace-fichiers {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    
+    div {
+        display: flex;
+        flex-flow: column nowrap;
+        font-size: 1.7vmin;
+        text-align: center;
+        height: 14vh;
+        width: 14vh;
+        margin: 1vmin;
+
+        img {
+            height: 75%;
+            margin-bottom: 1vmin;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+    }
+}
+
+.matiere,
+.note-examen,
+.date-news {
+    color: @orange;
+    font-family: "Effra Light";
+    margin:0;
+}
+
+.matiere {
+    font-size: @fontSize;
+    padding: 2vh 1vw 0 1vw;
+}
+
+.note-examen {
+    font-size: @fontSize + 4.5;
+    padding: 1vh 1vw 0 1vw;
+}
+
+.dernieres-news {
+    overflow-y: scroll;
+    height: 15vh;
+
+    &::-webkit-scrollbar {
+      width: 1.5vmin;
+      height: 100%;
+    }
+
+    &::-webkit-scrollbar-button {
+      width: 0;
+      height: 0;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: @orange;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #dbdbdb;
+    }
+
+    &::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+    
+    div {
+        margin: 1vh 0;
+        padding-top: 2vh 1vw;
+        background-color: white;
+    }
+}
+
+.date-news {
+    font-size: @fontSize;
+    padding: 1vh 1vw 0 1vw;
+}
+
+.news {
+    margin: 0;
+    font-family: "Effra Light";
+    font-size: @fontSize;
+    padding: 0 1vw;
+}
+
+footer {
+    margin: 0;
+    height: 3vh;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    img {
+        height: 4vh;
+        max-width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        max-width: 27vw;
+        min-width: 13vw;
+        font-size: @fontSize;
+        font-family: "Effra Bold";
+    }
+
+    #corbeille:hover,
+    #ajElem:hover {
+        transform: scale(1.2);
+    }
+}
+
+@media (min-width: 480px) {
+    body {
+        background: url(fond.jpg);
+        background-size: cover;
+        background-position: center;
+        background-attachment: scroll;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        font-family: @fontFamily;
+        color: @bleu;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        margin: 0;
+    }
+
+    h1 {
+        text-align: right;
+        grid-area: pageName;
+        text-transform: uppercase;
+        font-size: @fontSize + 2.5;
+        padding-top: 2vh;
+    }
+
+    h2 {
+        text-align: left;
+        grid-area: identite;
+        font-size: @fontSize + 0.5;
+        padding-top: 1.5vh;
+    }
+
+    h3 {
+        margin: 0 1vw 0 1vw;
+        padding: 2vh 0 1vh 0;
+        border-bottom: 1px solid #F39E92;
+        font-size: @fontSize;
+    }
+
+    h4 {
+        font-size: @fontSize - 0.5;
+        text-transform: uppercase;
+    }
+
+    h5 {
+        font-size: @fontSize - 1;
+    }
+
+    a {
+        color: @bleu;
+    }
+
+    header {
+        margin:0;
+        padding: 0 1vw 0 1vw;
+        height: 9vh;
+        background-color: white;
+        display: grid;
+        grid-template-columns: 2fr 11fr 2fr 7fr 6fr;
+        grid-template-areas: "menu pageName logo identite nav";
+        align-items: center;
+
+        label {
+            position: relative;
+            display: block;
+            grid-area: menu;
+            margin: 2vh;
+            height: 5vmin;
+            width: 5vmin;
+            z-index: 3;
+            transition: 0.5s ease-in-out;
+            cursor: pointer;
+
+            div {
+                display: block;
+                position: absolute;
+                top: 2vh;
+                height: 0.6vmin;
+                width: 5vmin;
+                border-radius: 2px;
+                background-color: @orange;
+                transition: 0.5s ease-in-out;
+
+                &::after,
+                &::before {
+                    content: '';
+                    height: 0.5vmin;
+                    width: 5vmin;
+                    background-color: #E95039;
+                    position: absolute;
+                    border-radius: 2px;
+                    transition: 0.5s ease-in-out;
+                }
+
+                &::after {
+                    top: 1vh;
+                }
+
+                &::before {
+                    top: -1vh;
+                }
+            }
+        }
+
+        input {
+            display: none;
+
+            &:checked + div {
+                transform: rotate(90deg);
+                background-color: transparent;
+
+                &::after,
+                &::before {
+                    background-color: @bleu;
+                    top: -41vh;
+                    left: 7vw;
+                }
+
+                &::after {
+                    transform: rotate(-45deg);
+                }
+
+                &::before {
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+    #burger_toggle {
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        left: -25vw;
+        width: 25vw;
+        height: 100vh;
+        background-color: #EB634F;
+        transition: 0.5s ease-in-out;
+    }
+
+    #haut_menu {
+        height: 15vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background-color: white;
+        margin: 0;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 1.5vw;
+        }
+
+        a {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding-top: 1vh;
+
+            h5 {
+                padding-top: 0.6vh;
+            }
+
+            img {
+                padding: 0 1vw 0 0.3vw;
+                height: 2.7vmin;
+                max-width: 100%;
+            }
+        }
+    }
+
+    #bas_menu {
+        position: relative;
+        padding-top: 3vh;
+
+        ul {
+            margin: 0;
+            padding-left: 1.5vw;
+        }
+
+        li {
+            list-style: none;
+            padding-bottom: 2vh;
+
+            a {
+                color: white;
+                text-decoration: none;
+                font-size: @fontSize;
+            }
+        }
+    }
+
+    #burger-overlay {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.33);
+        transition: 0.5s ease-in-out;
+        z-index: 1;
+    }
+
+    #logo {
+        position: relative;
+        min-width: 10.3vmin;
+        grid-area: logo;
+
+        img {
+            position: absolute;
+            width: auto;
+            height: 12vh;
+            top: -5vh;
+            left: calc(50% - 5vmin);
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    #icones_nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        grid-area: nav;
+
+        img {
+            height: 100%;
+            max-width: 100%;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+
+        a {
+            height: 6vh;
+            margin: 0.2vmin;
+        }
+    }
+
+    main {
+        margin-top: 0.4vh;
+        background-color: rgba(255, 255, 255, 0.6);
+        height: 77.6vh;
+    }
+
+    section {
+        padding: 10vh 8vw 0 8vw;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .boite {
+        background-color: rgba(255, 255, 255, 0.88);
+        flex-basis: calc((100% - 40px) / 3);
+        width: calc((100% - 40px) / 3);
+        min-width: 275px;
+    }
+
+    .haut {
+        height: 43vh;    
+        margin-bottom: 2vh;
+        position: relative;
+    }
+
+    .bas {
+        height: 22vh;
+    }
+
+    .notif-mail {
+        position: absolute;
+        margin:0;
+        color: @orange;
+        font-family: "Effra Light";
+        font-size: @fontSize - 0.7;
+        font-weight: bold;
+        top: 2.2vh;
+        right: 1vw;
+        border: 1px solid rgba(0,0,0,0.1);
+        border-radius: 8%;
+        padding: 0.5vh 0.3vw 0 0.3vw;
+    }
+
+    #derniers-mails {
+        height: 34.8vh;
+        margin-top: 1.7vh;
+        display: grid;
+        grid-template-columns: 21fr 2fr;
+        grid-template-rows: repeat(3, 1fr);
+        justify-content: space-between;
+        background-color: #3F5ABD;
+        border: 0.2vh solid rgba(40,57,120,0.2);
+    }
+
+    .fleche_mail {
+        height: 100%;
+        width: 100%;
+        background-color: @bleu;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:not(:last-child) {
+            border-bottom: 0.2vh solid rgba(40,57,120,0.2);
+        }
+
+        img {
+            height: 8vh;
+            object-fit: contain;
+            cursor: pointer;
+        }
+    }
+
+    .mail {
+        height: 11.4vh;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 2fr 1fr 3fr;
+        grid-template-areas: "auteur auteur date" "objet objet objet" "vide corps corps";
+        color: white;
+        padding: 0 1vmin;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            border-bottom: 0.2vh solid rgba(40,57,120,0.2);
+        }
+    }
+
+    .auteur-mail {
+        margin: 0;
+        font-family: "Effra Bold";
+        grid-area: auteur;
+        font-size: @fontSize - 0.3;
+        padding-top: 1.8vh;
+    }
+
+    .date-mail {
+        margin: 0;
+        font-family: "Effra Bold";
+        grid-area: date;
+        font-size: @fontSize;
+        padding-top: 1vh;
+        text-align: right;
+    }
+
+    .objet-mail {
+        margin: 0;
+        font-family: "Effra Light";
+        grid-area: objet;
+        font-size: @fontSize - 0.7;
+    }
+
+    .corps-mail {
+        margin: 0;
+        font-family: "Effra Light";
+        grid-area: corps;
+        font-size: @fontSize - 1.2;
+        padding-top: 0.7vh;
+    }
+
+    #modifier-note {
+        position: absolute;
+        top: 1.5vh;
+        right: 1vw;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        min-width: 8vmax;
+        height: 3vmin;
+
+        img {
+            height: 100%;
+            margin-left: 0.5vmax;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.5);
+            }
+        }
+    }
+
+    .date-note {
+        margin: 1.5vmin 1vw 1vmin 1vw;
+        font-size: @fontSize + 0.5;
+        color: #EB634F;
+    }
+
+    .note-perso {
+        font-family: "Effra Light";
+        font-size: @fontSize + 0.3;
+        margin: 0 1vw 0 1vw;
+        text-align: justify;
+    }
+
+    .date-courante{
+        position: absolute;
+        margin:0;
+        color: @orange;
+        font-family: "Effra Light";
+        font-size: 1.1vmax;
+        top: 2.2vh;
+        right: 1vw;
+    }
+
+    .cours {
+        margin: 2vh 0;
+        padding-top: 2vh 1vw;
+        background-color: white;
+        font-family: "Effra Light";
+        font-size: @fontSize + 1;
+
+        div {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-end;
+            margin: 0;
+            padding: 1vh 1vw;
+
+            .salle {
+                margin: 0;
+                color: @orange;
+                padding-left: 1vh;
+            }
+        }
+    }
+
+    .horaire {
+        margin: 0;
+        color: @orange;
+        font-size: @fontSize + 0.5;
+        padding: 1vh 1vw 0 1vw;
+    }
+
+    #espace-fichiers {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        div {
+            display: flex;
+            flex-flow: column nowrap;
+            font-size: 1.7vmin;
+            text-align: center;
+            height: 14vh;
+            width: 14vh;
+            margin: 1vmin;
+
+            img {
+                height: 75%;
+                margin-bottom: 1vmin;
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+
+    .matiere,
+    .note-examen,
+    .date-news {
+        color: @orange;
+        font-family: "Effra Light";
+        margin:0;
+    }
+
+    .matiere {
+        font-size: @fontSize;
+        padding: 2vh 1vw 0 1vw;
+    }
+
+    .note-examen {
+        font-size: @fontSize + 4.5;
+        padding: 1vh 1vw 0 1vw;
+    }
+
+    .dernieres-news {
+        overflow-y: scroll;
+        height: 15vh;
+
+        &::-webkit-scrollbar {
+          width: 1.5vmin;
+          height: 100%;
+        }
+
+        &::-webkit-scrollbar-button {
+          width: 0;
+          height: 0;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: @orange;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #dbdbdb;
+        }
+
+        &::-webkit-scrollbar-corner {
+          background: transparent;
+        }
+
+        div {
+            margin: 1vh 0;
+            padding-top: 2vh 1vw;
+            background-color: white;
+        }
+    }
+
+    .date-news {
+        font-size: @fontSize;
+        padding: 1vh 1vw 0 1vw;
+    }
+
+    .news {
+        margin: 0;
+        font-family: "Effra Light";
+        font-size: @fontSize;
+        padding: 0 1vw;
+    }
+
+    footer {
+        margin: 0;
+        padding: 0 8vw 0 8vw;
+        height: 13vh;
+        background-color: rgba(255, 255, 255, 0.6);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        img {
+            height: 4vh;
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            max-width: 27vw;
+            min-width: 13vw;
+            font-size: @fontSize;
+            font-family: "Effra Bold";
+        }
+
+        #corbeille:hover,
+        #ajElem:hover {
+            transform: scale(1.2);
+        }
+    }
+}

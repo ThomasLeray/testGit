@@ -1,0 +1,14 @@
+{
+    "require": {
+        "symfony/routing": "^4.1",
+        "symfony/http-foundation": "^4.1",
+        "symfony/yaml": "^4.1",
+        "ext-json": "^1.6",
+        "ext-pdo": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "UnivLeMans\\TP\\": "src/"
+        }
+    }
+}
